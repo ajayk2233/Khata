@@ -1,2 +1,0 @@
-# Khata
-Simple Accounting App
