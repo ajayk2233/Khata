@@ -1,0 +1,52 @@
+/* Signup Form */
+body{
+
+    /* margin: 0;
+    padding: 0;
+    font-family: sans-serif; */
+    background: #ffffff;
+}
+.form-signin{
+    border-radius: 24px;
+}
+.form-signin h3{
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+.form-signin input[type = "text"],.form-signin input[type = "password"]{
+    border-radius: 24px;
+    transition: 0.25s;
+    border: 1px solid #3498db;
+}
+.form-signin input[type = "submit"]{
+    border-radius: 24px;
+    transition: 0.25s;
+    padding: 10px 10px;
+}
+.form-signin a{
+    border-radius: 24px;
+    transition: 0.25s;
+    padding: 10px 10px;
+}
+
+/* Signin Form */
+
+.form-row h3{
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+.form-row input[type = "text"],.form-row input[type = "password"]{
+    border-radius: 24px;
+    transition: 0.25s;
+    border: 1px solid #3498db;
+}
+.form-row input[type = "submit"]{
+    border-radius: 24px;
+    transition: 0.25s;
+    padding: 10px 10px;
+}
+.form-row a{
+    border-radius: 24px;
+    transition: 0.25s;
+    padding: 10px 10px;
+}

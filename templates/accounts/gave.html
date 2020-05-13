@@ -1,0 +1,48 @@
+{% extends 'layout_app.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style_account.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-info rounded-right">
+        <h4>
+            <a href="{{previous_url}}" class="btn btn-secondary">
+                << </a>
+                    <label style="color: blanchedalmond;">You Gave</label>
+        </h4>
+    </nav>
+    <!-- Navbar ends -->
+<br><br>
+
+<form class="form-row" method="POST">
+    {% csrf_token %}
+    <div align="center" class="col-md-4 order-md-1">
+    <label>Description:</label> {{form.desc}}<br>
+    <label>Amount gave:</label> {{form.gave}}<br>
+    <input type="submit" value="You Gave" class="btn btn-outline-primary">
+    </div>
+</form>
+
+{% if form.errors %}
+    {% for error in form %}
+        {% for err in error.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ err|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

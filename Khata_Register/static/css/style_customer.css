@@ -1,0 +1,28 @@
+
+/* Customer Form */
+
+.form-row{
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.form-row input[type = "text"],.form-row input[type = "number"]{
+    border-radius: 24px;
+    transition: 0.25s;
+    border: 1px solid #3498db;
+    text-align: center;
+    
+}
+.form-row input[type = "submit"],.form-row a{
+    border-radius: 24px;
+    transition: 0.25s;
+    padding: 10px 10px;
+}
+.text-center{
+    background:url('/static/images/about.jpg')
+}
+.text-center h1,.text-center p,.text-center h4{
+    color:white
+}

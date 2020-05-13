@@ -1,0 +1,32 @@
+{% extends 'layout_app.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/style_customer.css' %}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-info rounded-right">
+        <h4>
+            <a href="{{previous_url_del_acc}}" class="btn btn-secondary">
+                << </a>
+                    <label style="color: blanchedalmond;">Delete Transaction</label>
+        </h4>
+    </nav>
+    <!-- Navbar ends -->
+    <br><br>
+    <form class="form-row" method="POST">
+        {% csrf_token %}
+        <div align="center" class="col-md-4 order-md-1">
+            <h5>Delete Transaction</h5>
+            <hr><label><small>This will delete selected Transaction.</small></label><hr>
+            <input type="submit" value="Delete" class="btn btn-danger"><br><br>
+            <a class="btn btn-primary" href="{{previous_url_del_acc}}">Cancel</a>
+    </form>
+
+    {% endblock %}

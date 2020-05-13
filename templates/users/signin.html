@@ -1,0 +1,30 @@
+{% extends  'layout.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+    
+
+<body class="text-center">
+  <div class="col-md-4 p-lg-5 mx-auto my-5">
+    <form action="{{request.build_absolute_uri}}" method="POST" class="form-signin">
+        {% csrf_token %}
+        <h3 align="center">Kindly Login </h3><br>
+      <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required autofocus>
+      <br>
+      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <br>
+      <input class="btn btn-primary btn-block" value="Login !" type="submit">
+      <a class="btn btn-block btn-outline-primary" href="{% url 'signup' %}">Don't have an Account</a><br>
+      <a href="{% url 'password_reset' %}">Forgot Password</a><br>
+      {% if message %}
+    <p align=True style="color: red;">{{message}}</p>
+    {% endif %}
+    </form>
+  </div>
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    
+<div class="container">
+
+  <form action="{% url 'signup' %}" class="form-row" method="POST">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-4 order-md-1">
+
+        {{form.username.label_tag}}
+        {{form.username}}
+        {{form.email.label_tag}}
+        {{form.email}}
+        {{form.password1.label_tag}}
+        {{form.password1}}
+        {{form.password2.label_tag}}
+        {{form.password2}}
+    <hr><input class="btn btn-block btn-primary" type="submit" value="Signup!">
+        
+        <a href="{% url 'signin' %}" class="btn btn-block btn-outline-secondary">Already have an account</a>
+        {{message}}
+      </div>
+      <div class="col-md-8 order-md-2">
+        <label align="center" class="display-4">Signup Instructions</label>
+        <label style="font-size: large;">1) Username: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+          only.</label><br>
+        <label style="font-size: large;">2) Your password can’t be too similar to your other personal
+          information.</label><br>
+        <label style="font-size: large;">3) Your password must contain at least 8 characters.</label><br>
+        <label style="font-size: large;">4) Your password can’t be a commonly used password.</label><br>
+        <label style="font-size: large;">5) Your password can’t be entirely numeric.</label><br><br>
+          
+        {% if form.errors %}
+          {% for error in form %}
+              {% for err in error.errors %}
+                  <div class="alert alert-danger">
+                      <strong>{{ err|escape }}</strong>
+                  </div>
+              {% endfor %}
+          {% endfor %}
+          {% for error in form.non_field_errors %}
+              <div class="alert alert-danger">
+                  <strong>{{ error|escape }}</strong>
+              </div>
+          {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+</div>
+</form>
+</div>
+</body>
+</html>
+{% endblock %}

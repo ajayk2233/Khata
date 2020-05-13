@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+{% load mathfilters %}
+
+
+{% if total_balance > 0  %}
+<div class="row mb-4" align="center">
+  <div class="col-6 themed-grid-col" style="color: green;border:solid;">{{total_balance}}<br><small>You will
+      receive</small></div>
+  <div class="col-6 themed-grid-col" style="color: red;border:solid;">0<br><small>You will pay</small></div>
+</div>
+{% elif total_balance == 0 %}
+<div class="row mb-4" align="center">
+  <div class="col-6 themed-grid-col" style="color: green;border:solid;">0<br><small>You will receive</small></div>
+  <div class="col-6 themed-grid-col" style="color: red;border:solid;">0<br><small>You will pay</small></div>
+</div>
+{% else %}
+<div class="row mb-4" align="center">
+  <div class="col-6 themed-grid-col" style="color: green;border:solid;">0<br><small>You will receive</small></div>
+  <div class="col-6 themed-grid-col" style="color: red;border:solid;">{{total_balance | abs}}<br><small>You will
+      pay</small></div>
+</div>
+{% endif %}
+
+{% for cust in customer %}
+
+
+<div style="padding: 10px;" class="media text-muted pt-3">
+  <svg class="bd-placeholder-img mr-2 rounded" width="40" height="40" xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+    <title>Placeholder</title>
+    <rect width="100%" height="100%" fill="#007bff" /><text x="50%" fill="white" y="50%"
+      dy=".3em">{{cust.name | slice:"0:1"}}</text>
+  </svg>
+  <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+    <strong class="d-block text-gray-dark"><a
+        href="{% url 'khata:account' id=cust.id name=cust.name %}">{{cust.name}}</a></strong>
+        {% if cust.bal_amount > 0 %}
+        <p style="color: green;">{{ cust.bal_amount }}</p>
+        {% else %}
+        <p style="color: red;">{{ cust.bal_amount | abs }}</p>
+        {% endif %}
+  </p>
+</div>
+{% endfor %}
+<hr>
+
+
+<br><br>
+<div style="position: fixed;bottom: 0;width: 100%;">
+  <label></label>
+  <a href="{% url 'customer:add_customer' %}" class="btn btn-outline-primary">Add Customer</a>
+</div>
+
+{% endblock %}

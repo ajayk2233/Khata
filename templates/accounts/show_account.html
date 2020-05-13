@@ -1,0 +1,93 @@
+{% extends 'layout_app.html' %}
+{% block content %}
+{% load mathfilters %}
+
+<head>
+    <style>
+        #table {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #table td,
+        #table th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #table td a{
+            color: black;
+            
+        }
+        #table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #table tr:hover {
+            background-color: #ddd;
+        }
+        #table th {
+            padding-top: 3px;
+            padding-bottom: 3px;
+            text-align: center;
+            background-color: rgb(255, 255, 255);
+            color: rgb(110, 103, 103);
+            font-size:x-small;
+        }
+    </style>
+</head>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border border-info rounded-right">
+    <h4>
+        <a href="{% url 'customer:show_customer' %}" class="btn btn-secondary"><<</a>
+        <a style="color: blanchedalmond;" href="{% url 'customer:update_customer' pk=cust_id %}">{{cust_name}}'s
+            Account</a>
+    </h4>
+</nav>
+<!-- Navbar ends -->
+
+<div class="row mb-4" align="center">
+    {% if balance > 0  %}
+    <div class="col-6 themed-grid-col" style="color: green;border:solid;">{{balance}}<br><small>You will receive</small>
+    </div>
+    <div class="col-6 themed-grid-col" style="color: red;border:solid;">0<br><small>You will pay</small></div>
+    {% elif balance == 0 %}
+    <div class="col-6 themed-grid-col" style="color: green;border:solid;">0<br><small>You will receive</small></div>
+    <div class="col-6 themed-grid-col" style="color: red;border:solid;">0<br><small>You will pay</small></div>
+    {% else %}
+    <div class="col-6 themed-grid-col" style="color: green;border:solid;">0<br><small>You will receive</small></div>
+    <div class="col-6 themed-grid-col" style="color: red;border:solid;">{{balance | abs}}<br><small>You will
+            pay</small></div>
+    {% endif %}
+</div>
+
+<table id="table">
+    <tr>
+        <th>ENTRIES</th>
+        <th>YOU GAVE</th>
+        <th>YOU GOT</th>
+    </tr>
+    {% for entry in entries %}
+    <tr>
+        {% if entry.gave > entry.got %}
+        <td><a href="{% url 'khata:update_gave' pk=entry.pk cust_id=cust_id %}"
+                class="link">{{entry.desc}}<br><small>{{entry.created_at}}</small></td></a>
+        <td style="color: red;">{{entry.gave}}</td>
+        <td></td>
+        {% else %}
+        <td><a href="{% url 'khata:update_got' pk=entry.pk cust_id=cust_id %}"
+                class="link">{{entry.desc}}<br><small>{{entry.created_at}}</small></td></a>
+        <td></td>
+        <td style="color: green;">{{entry.got}}</td>
+        {% endif %}
+        
+    </tr>
+    {% endfor %}
+</table>
+
+<br><br>
+    <div style="position: fixed;bottom: 0;width: 100%;">
+   <label></label>
+    <a href="{% url 'khata:gave' %}?cust_id={{cust_id}}" class="btn btn-danger">You Gave</a>
+    <a href="{% url 'khata:got' %}?cust_id={{cust_id}}" class="btn btn-success">You Got</a>
+    
+    </div>
+{% endblock %}
